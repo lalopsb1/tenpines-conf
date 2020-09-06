@@ -12,7 +12,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: us-east-1
   # To load environment variables externally
@@ -22,11 +22,24 @@ provider:
   #
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+  environment:
+    tableName: ${ssm:${opt:stage}_TABLE_NAME}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+        - "sns:Publish"
+        - "sns:Subscribe"
+        - "dynamodb:GetItem"
+        - "dynamodb:Query"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+      Resource: "*"
 
 functions:
-  hello:
-    handler: handler.hello
+  addQuote:
+    handler: src/handlers/add.handler
     events:
       - http:
-          path: hello
-          method: get
+          path: add
+          method: post

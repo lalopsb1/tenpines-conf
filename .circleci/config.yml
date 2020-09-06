@@ -2,7 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.10
+      - image: circleci/node:12
+      - image: amazon/dynamodb-local
 
     working_directory: ~/repo
 
@@ -28,8 +29,8 @@ jobs:
 
       # run tests!
       - run:
-          name: Run tests with coverage
-          command: npm test --coverage
+          name: Run tests
+          command: npm test --passWithNoTests
 
       - run:
           name: Deploy application
