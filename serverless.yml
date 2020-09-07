@@ -23,17 +23,16 @@ provider:
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
   environment:
+    stage: ${self:provider.stage}
     tableName: ${ssm:${opt:stage}_TABLE_NAME}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
-        - "lambda:InvokeFunction"
-        - "sns:Publish"
-        - "sns:Subscribe"
         - "dynamodb:GetItem"
         - "dynamodb:Query"
         - "dynamodb:PutItem"
         - "dynamodb:UpdateItem"
+        - "dynamodb:Scan"
       Resource: "*"
 
 functions:
@@ -43,3 +42,9 @@ functions:
       - http:
           path: add
           method: post
+  getRandomQuote:
+    handler: src/handlers/getRandom.handler
+    events:
+      - http:
+          path: getRandom
+          method: get
