@@ -31,6 +31,10 @@ provider:
         - "dynamodb:PutItem"
         - "dynamodb:UpdateItem"
         - "dynamodb:Scan"
+        - "cloudformation:DescribeStackResource"
+        - "cloudformation:DeleteStack"
+        - "s3:ListObjects"
+        - "s3:DeleteObjects"
       Resource: "*"
 
 # Las lambdas/funciones
