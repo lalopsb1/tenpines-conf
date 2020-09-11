@@ -1,7 +1,6 @@
 # Nombre del servicio/aplicación
 service: tenpines-conf
 
-# Creamos un paquete optimizado para las funciones
 package:
   individually: true
 
