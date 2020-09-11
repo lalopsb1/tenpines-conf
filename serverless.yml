@@ -35,6 +35,12 @@ provider:
         - "cloudformation:DeleteStack"
         - "s3:ListObjects"
         - "s3:DeleteObjects"
+        - "lambda:DeleteFunction"
+        - "logs:DeleteLogGroup"
+        - "apigateway:DELETE"
+        - "iam:DeleteRolePolicy"
+        - "s3:DeleteBucket"
+        - "s3:DeleteBucketPolicy"
       Resource: "*"
 
 # Las lambdas/funciones
