@@ -43,7 +43,6 @@ provider:
         - "s3:DeleteBucketPolicy"
       Resource: "*"
 
-# Las lambdas/funciones
 functions:
   addQuote:
     handler: src/handlers/add.handler
