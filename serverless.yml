@@ -34,16 +34,4 @@ provider:
 
 # Las lambdas/funciones
 functions:
-  addQuote:
-    handler: src/handlers/add.handler
-    events:
-      - http:
-          path: add
-          method: post
-    getRandomQuote:
-      handler: src/handlers/getRandom.handler
-      events:
-        - http:
-            path: getRandom
-            method: get
 
