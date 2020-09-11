@@ -34,7 +34,7 @@ provider:
         - "cloudformation:DescribeStackResource"
         - "cloudformation:DeleteStack"
         - "s3:ListObjects"
-        - "s3:DeleteObjects"
+        - "s3:DeleteObject"
         - "lambda:DeleteFunction"
         - "lambda:RemovePermission"
         - "logs:DeleteLogGroup"
