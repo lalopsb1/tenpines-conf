@@ -5,7 +5,7 @@ package:
 
 plugins:
   - serverless-bundle
-  - serverless-offline # Offline nos permite invocar las funciones localmente, entre otras cosas.
+  - serverless-offline
   - serverless-dotenv-plugin # Load .env as environment variables (Mo lo utilizamos en este ejemplo)
 
 provider:
