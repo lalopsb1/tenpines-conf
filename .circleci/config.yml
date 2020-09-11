@@ -10,7 +10,6 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-
@@ -18,25 +17,26 @@ jobs:
             - v1-dependencies-
 
       - run:
-          name: Install Serverless CLI and dependencies
+          name: Instalo Serverless CLI y dependencias
           command: |
             sudo npm i -g serverless
             npm install
 
-      - run: # test what branch we're on.
-          name: "What branch am I on?"
+      - run: # testeo la branch en que estamos.
+          name: "En qué branch estoy?"
           command: echo ${CIRCLE_BRANCH}
 
-      # run tests!
+      # Corro tests!
       - run:
           name: Run tests
           command: npm test --passWithNoTests
 
+      # Deployo la aplicación
       - run:
           name: Deploy application
           command: |
             deployStage="review"
-            if [ "${CIRCLE_BRANCH}" == "dev" ] || [ "${CIRCLE_BRANCH}" == "staging" ] || [ "${CIRCLE_BRANCH}" == "prod"  ]; then
+            if [ "${CIRCLE_BRANCH}" == "dev" ] || [ "${CIRCLE_BRANCH}" == "prod"  ]; then
               deployStage=${CIRCLE_BRANCH}
             fi
             sls deploy --stage ${deployStage}
