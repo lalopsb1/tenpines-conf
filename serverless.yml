@@ -22,7 +22,7 @@ provider:
     tableName: ${ssm:${opt:stage}_TABLE_NAME}
     repository: ${ssm:${opt:stage}_REPOSITORY}
 
-   # Las policies para el rol que tendrán nuestras funciones
+   # Las policies para el role que tendrán nuestras funciones
   iamRoleStatements:
     - Effect: "Allow"
       Action:
