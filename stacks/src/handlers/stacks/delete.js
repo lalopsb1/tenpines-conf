@@ -5,7 +5,7 @@ import AWS, { S3, CloudFormation } from 'aws-sdk';
 import axios from 'axios';
 
 AWS.config.update({
-  region: "us-west-1",
+  region: "us-east-1",
 });
 
 export const cloudformation = new CloudFormation();
