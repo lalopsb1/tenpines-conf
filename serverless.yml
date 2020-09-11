@@ -15,8 +15,6 @@ provider:
   runtime: nodejs12.x # El lenguaje que utilizamos
   stage: dev # La stage por defecto
   region: us-east-1 # La región de aws
-
-  # Las variable de ambiente
   environment:
     stage: ${self:provider.stage}
     tableName: ${ssm:${opt:stage}_TABLE_NAME}
