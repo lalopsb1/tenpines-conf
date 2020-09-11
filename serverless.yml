@@ -20,6 +20,7 @@ provider:
   environment:
     stage: ${self:provider.stage}
     tableName: ${ssm:${opt:stage}_TABLE_NAME}
+    repository: ${ssm:${opt:stage}_REPOSITORY}
 
    # Las policies para el rol que tendrán nuestras funciones
   iamRoleStatements:
@@ -46,3 +47,12 @@ functions:
       - http:
           path: getRandom
           method: get
+  deleteStack:
+    handler: stacks/src/handlers/stacks/delete.handler
+    events:
+      - http:
+          path: delete
+          method: post
+          request:
+            schema:
+              application/json: ${file(stacks/src/libs/delete_request_model_schema.json)}

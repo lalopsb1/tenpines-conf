@@ -35,7 +35,7 @@ jobs:
       - run:
           name: Deploy application
           command: |
-            deployStage="review"
+            deployStage="pr-${CIRCLE_BRANCH##*/}"
             if [ "${CIRCLE_BRANCH}" == "dev" ] || [ "${CIRCLE_BRANCH}" == "prod"  ]; then
               deployStage=${CIRCLE_BRANCH}
             fi
