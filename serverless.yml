@@ -1,32 +1,36 @@
-# NOTE: update this with your service name
+# Nombre del servicio/aplicación
 service: tenpines-conf
 
-# Create an optimized package for our functions
+# Creamos un paquete optimizado para las funciones
 package:
   individually: true
 
 plugins:
-  - serverless-bundle # Package our functions with Webpack
-  - serverless-offline
-  - serverless-dotenv-plugin # Load .env as environment variables
+  - serverless-bundle # Empaquetamos las funciones utilizando webpack
+  - serverless-offline # Offline nos permite invocar las funciones localmente, entre otras cosas.
+  - serverless-dotenv-plugin # Load .env as environment variables (Mo lo utilizamos en este ejemplo)
 
 provider:
-  name: aws
-  runtime: nodejs10.x
-  stage: dev
-  region: us-east-1
-  # To load environment variables externally
-  # rename env.example to .env and uncomment
-  # the following line. Also, make sure to not
-  # commit your .env.
-  #
-  #environment:
-  #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+  name: aws # El nombre del proovedor
+  runtime: nodejs12.x # El lenguaje que utilizamos
+  stage: dev # La stage por defecto
+  region: us-east-1 # La región de aws
 
+  # Las variable de ambiente
+  environment:
+    stage: ${self:provider.stage}
+    tableName: ${ssm:${opt:stage}_TABLE_NAME}
+
+   # Las policies para el rol que tendrán nuestras funciones
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+        - "dynamodb:Query"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:Scan"
+      Resource: "*"
+
+# Las lambdas/funciones
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
