@@ -4,7 +4,7 @@ package:
   individually: true
 
 plugins:
-  - serverless-bundle # Empaquetamos las funciones utilizando webpack
+  - serverless-bundle
   - serverless-offline # Offline nos permite invocar las funciones localmente, entre otras cosas.
   - serverless-dotenv-plugin # Load .env as environment variables (Mo lo utilizamos en este ejemplo)
 
