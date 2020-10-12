@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"sns-topics","Source":"devops-workflow/sns-topics/aws","Version":"0.1.3","Dir":".terraform/modules/sns-topics"}]}

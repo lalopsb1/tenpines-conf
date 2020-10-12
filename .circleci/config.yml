@@ -54,9 +54,13 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
+            deployStage="staging"
+            if [ "${CIRCLE_BRANCH}" == "prod" ]; then
+              deployStage="production"
+            fi
             cd terraform
             terraform init -input=false
-            terraform plan
+            terraform plan -out tfapply -var-file ${deployStage}.variables.tfvars
       - persist_to_workspace:
           root: .
           paths:
@@ -72,7 +76,7 @@ jobs:
           name: terraform
           command: |
             cd terraform
-            terraform apply -auto-approve
+            terraform apply -auto-approve tfapply
       - persist_to_workspace:
           root: .
           paths:
