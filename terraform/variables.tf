@@ -11,3 +11,7 @@ variable "secret_key" {
 variable "environment" {
   description = "AWS app environment"
 }
+
+variable "environment_prefix" {
+  description = "Environment prefix for SNS topic name"
+}
